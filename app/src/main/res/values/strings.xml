@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Prasad</string>
+
+    <!--    fruits-->
+    <string name="apricot">Apricot</string>
+    <string name="avocado">Avocado</string>
+    <string name="apple">Apple</string>
+    <string name="orange">Orange</string>
+    <string name="banana">Banana</string>
+    <string name="peach">Peach</string>
+    <string name="mango">Mango</string>
+    <string name="lime">Lime</string>
+    <string name="grapefruit">Grapefruit</string>
+    <string name="kiwi">Kiwi</string>
+    <string name="pear">Pear</string>
+    <string name="strawberry">Strawberry</string>
+    <string name="blackberry">Blackberry</string>
+    <string name="pineapple">Pineapple</string>
+    <string name="date">Date</string>
+    <string name="dragon_fruit">Dragon fruit</string>
+    <string name="papaya">Papaya</string>
+    <string name="fig">Fig</string>
+    <string name="coconut">Coconut</string>
+    <string name="melon">Melon</string>
+    <string name="watermelon">Watermelon</string>
+
+    <string name="basmati_rice">Basmati rice</string>
+    <string name="mung">Mung</string>
+    <string name="chickpea">Сhickpea</string>
+    <string name="brown_rice">Brown rice</string>
+    <string name="corn">Corn</string>
+    <string name="rye">Rye</string>
+    <string name="ghee">Ghee</string>
+    <string name="water">Вода</string>
+
+    <!--    spices-->
+    <string name="salt">Salt</string>
+    <string name="black_salt">Black salt</string>
+
+    <string-array name="khichdi">
+        <item>Khichdi</item>
+        <item>@string/basmati_rice</item>
+        <item>@string/mung</item>
+        <item>@string/ghee</item>
+        <item>@string/salt</item>
+        <item>@string/water</item>
+    </string-array>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Прасад</string>
+
+    <!--    fruits-->
+    <string name="apricot">Абрикос</string>
+    <string name="avocado">Авокадо</string>
+    <string name="apple">Яблоко</string>
+    <string name="orange">Апельсин</string>
+    <string name="banana">Банан</string>
+    <string name="peach">Персик</string>
+    <string name="mango">Манго</string>
+    <string name="lime">Лайм</string>
+    <string name="grapefruit">Грейпфрут</string>
+    <string name="kiwi">Киви</string>
+    <string name="pear">Груша</string>
+    <string name="strawberry">Клубника</string>
+    <string name="blackberry">Ежевика</string>
+    <string name="pineapple">Ананас</string>
+    <string name="date">Финик</string>
+    <string name="dragon_fruit">Драгонфрут</string>
+    <string name="papaya">Папайя</string>
+    <string name="fig">Инжир</string>
+    <string name="coconut">Кокос</string>
+    <string name="melon">Дыня</string>
+    <string name="watermelon">Арбуз</string>
+
+    <!--    ingredients-->
+    <string name="basmati_rice">Басмати рис</string>
+    <string name="mung">Маш</string>
+    <string name="chickpea">Нут</string>
+    <string name="brown_rice">Коричневый рис</string>
+    <string name="corn">Пшеница</string>
+    <string name="rye">Рожь</string>
+    <string name="ghee">Гхи</string>
+    <string name="water">Вода</string>
+
+    <!--    spices-->
+    <string name="salt">Соль</string>
+    <string name="black_salt">Черная соль</string>
+
+    <string-array name="khichdi">
+        <item>Кичари</item>
+        <item>@string/basmati_rice</item>
+        <item>@string/mung</item>
+        <item>@string/ghee</item>
+        <item>@string/salt</item>
+        <item>@string/water</item>
+    </string-array>
+
+</resources>
