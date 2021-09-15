@@ -21,8 +21,10 @@ class RecipesAdapter(private val recipes: List<Recipe>): RecyclerView.Adapter<Re
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
+        var ingredients: String = ""
+        recipes[position].ingredients.forEach({(k,v) -> run { ingredients += "•" + k.name + " " } })
         holder.nameTextView.text = recipes[position].name
-        holder.descriptionTextView.text = recipes[position].technology
+        holder.descriptionTextView.text = ingredients
     }
 
     override fun getItemCount() = recipes.size

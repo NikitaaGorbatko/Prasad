@@ -20,15 +20,7 @@ class MainActivity : AppCompatActivity() {
         }
 
        //I think I should to use room for storage recipes not xml
-        //prepopulating the database is a good way to set all data into app
-
-//        1000 - 700
-//        60 -   x
-//        42
-//
-//        5000 - 1380
-//        80 -   x
-//        22
+        // prepopulating the database is a good way to set all data into app
 
     }
 }

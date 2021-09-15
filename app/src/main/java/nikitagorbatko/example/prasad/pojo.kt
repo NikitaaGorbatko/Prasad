@@ -1,39 +1,53 @@
 package nikitagorbatko.example.prasad
 
 import android.app.Application
+import androidx.room.*
 
-data class Recipe(val name: String, val ingredients: Map<Ingredient, Int>, val technology: String)
 
-data class Ingredient(val name: String)
+@Entity(tableName = "ingredient_table")
+class Ingredient(@PrimaryKey val ingredientName: String, val description: String)
+
+@Entity(tableName = "recipes_table")
+class Recipe(@PrimaryKey val recipeName: String, val technology: String)
+
+@Entity(foreignKeys = [ForeignKey(entity = Recipe::class,
+    parentColumns = arrayOf("ingredientName"),
+    childColumns = arrayOf("ingredientName"))]
+)
+
+@Dao
+interface IngredientDao {
+    @Query("SELECT * FROM ingredient_table")
+    fun getIngredients(): List<Ingredient>
+
+    @Insert()
+    suspend fun insertIngredient(ingredient: Ingredient)
+
+    @Query("DELETE FROM ingredient_table")
+    suspend fun deleteIngredient(ingredient: Ingredient)
+}
 
 object Ingredients {
-    val water = Ingredient("Water")
+    val water = Ingredient("water")
     val a = Ingredient("get")
-//    val basmati = Ingredient(resources.getString(R.string.basmati_rice))
-//    val mung = Ingredient(resources.getString(R.string.mung))
-    val gi = Ingredient("Gi")
-//    val chickpea = Ingredient(getString(R.string.chickpea))
-//    val brownRice = Ingredient(getString(R.string.brown_rice))
-//    val corn = Ingredient(getString(R.string.corn))
-//    val rye = Ingredient(getString(R.string.rye))
-//    val apple = Ingredient(getString(R.string.apple))
-//    val orange = Ingredient(getString(R.string.orange))
-//    val banana = Ingredient(getString(R.string.banana))
+    val basmati = Ingredient("basmati rice")
+    val mung = Ingredient("mung")
+    val gee = Ingredient("gee")
+
 }
 
 object Recipes: Application() {
     private val ingredientsSet = mapOf(
-        Ingredients.gi to 30,
+        Ingredients.basmati to 100,
+        Ingredients.mung to 100,
+        Ingredients.gee to 30,
         Ingredients.water to 1000
     )
 
     val recipes = listOf(
-        Recipe("Булочки", ingredientsSet, "1 - boil the water" +
-                "2 - put into the pot mung, wait for 30 minutes" +
-                "3 - put into the pot basmati, wait for 15 minutes" +
-                "4 - at the end add gi oil, and salt"),
+        Recipe("Кичри", ingredientsSet, "1 - закипятить воду\n" +
+                "2 - добавить маш и варить 30 минут\n" +
+                "3 - добавить рис басмати и варить 15 минут\n" +
+                "4 - в конце готовки добавить столовую ложку ги и соль\n"),
     )
 }
-
-//val avocadoSalad = Recipe("Avocado salad", Ingredients.ingredients, "description")
-
