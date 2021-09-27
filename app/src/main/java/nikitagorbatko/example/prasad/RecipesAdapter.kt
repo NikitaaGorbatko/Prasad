@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import nikitagorbatko.example.prasad.database.Ingredient
 
 class RecipeHolder(view: View): RecyclerView.ViewHolder(view) {
     val nameTextView = view.findViewById<TextView>(R.id.name_text_view)
     val descriptionTextView = view.findViewById<TextView>(R.id.ingredients_text_view)
 }
 
-class RecipesAdapter(private val recipes: List<Recipe>): RecyclerView.Adapter<RecipeHolder>() {
+class RecipesAdapter(private val ingredients: List<Ingredient>): RecyclerView.Adapter<RecipeHolder>() {
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
@@ -21,12 +22,10 @@ class RecipesAdapter(private val recipes: List<Recipe>): RecyclerView.Adapter<Re
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
-        var ingredients: String = ""
         //recipes[position].ingredients.forEach({(k,v) -> run { ingredients += "•" + k.name + " " } })
         //holder.nameTextView.text = recipes[position].name
-        holder.descriptionTextView.text = ingredients
+        holder.descriptionTextView.text = ingredients[position].name
     }
 
-    override fun getItemCount() = recipes.size
-
+    override fun getItemCount() = ingredients.size
 }
