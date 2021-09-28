@@ -2,17 +2,9 @@ package nikitagorbatko.example.prasad.database
 
 import androidx.room.*
 
-@Entity(tableName = "ingredients")
-data class Ingredients(
-    @PrimaryKey val ingredientId: Int,
-    val nameRu: String,
-    val nameEn: String,
-    val descriptionRu: String,
-    val descriptionEn: String
-)
 
-@Entity(tableName = "recipes")
-data class Recipes(
+@Entity(tableName = "recipe")
+data class Recipe(
     @PrimaryKey val recipeId: Int,
     val nameRu: String,
     val nameEn: String,
@@ -20,31 +12,63 @@ data class Recipes(
     val technologyEn: String
 )
 
-@Entity(tableName = "units")
-data class Units(
+@Entity(tableName = "ingredient")
+data class Ingredient(
+    @PrimaryKey val ingredientId: Int,
+    val nameRu: String,
+    val nameEn: String,
+    val descriptionRu: String,
+    val descriptionEn: String
+)
+
+@Entity(tableName = "unit")
+data class Unit(
     @PrimaryKey val unitId: Int,
     val nameRu: String,
-    val nameEn: String
+    val nameEn: String,
+    val amount: Int
 )
 
-@Entity(tableName = "recipes_ingredients")
-class RecipesIngredients(
-    @PrimaryKey val recipesIngredientsId: Int,
-    @ForeignKey()
+@Entity(primaryKeys = ["ingredientId", "unitId"])
+data class IngredientUnitCrossRef(
+    val ingredientId: Int,
+    val unitId: Int
 )
 
+//
+@Entity(primaryKeys = ["recipeId", "ingredientId"])
+data class RecipeIngredientCrossRef(
+    val recipeId: Int,
+    val ingredientId: Int
+)
+
+//define one to one relationship
+data class IngredientAndUnit(
+    @Embedded val ingredient: Ingredient,
+    @Relation(
+        parentColumn = "ingredientId",
+        entityColumn = "unitId",
+    )
+    val unit: Unit,
+)
+
+//define one to many relationship
+data class RecipeWithIngredientAndUnit(
+    @Embedded val recipe: Recipe,
+    @Relation(
+        entity = Ingredient::class,
+        parentColumn = "recipeId",
+        entityColumn = "ingredientId",
+    )
+    val ingredients: List<IngredientAndUnit>
+)
 
 //https://stackoverflow.com/questions/45655382/database-schema-for-recipe-ingredient-measurement-amount
-@Entity(foreignKeys = [ForeignKey(entity = Recipe::class,
-    parentColumns = arrayOf("ingredientName"),
-    childColumns = arrayOf("ingredientName"))]
-)
 
+//https://developer.android.com/training/data-storage/room/relationships
 @Dao
-interface IngredientDao {
-//    @Query("SELECT * FROM ingredients_table")
-//    fun getIngredients(): List<Ingredient>
-//
-//    @Query("SELECT * FROM recipes_table")
-//    fun getRecipes(): List<Recipe>
+interface RecipeDao {
+    @Transaction
+    @Query("SELECT * FROM recipe")
+    fun getRecipes(): List<RecipeWithIngredientAndUnit>
 }
