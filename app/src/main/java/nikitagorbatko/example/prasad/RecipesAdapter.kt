@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import nikitagorbatko.example.prasad.database.Ingredient
+import nikitagorbatko.example.prasad.database.IngredientAndUnit
 import nikitagorbatko.example.prasad.database.RecipeWithIngredientAndUnit
 
 class RecipeHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -23,12 +24,9 @@ class RecipesAdapter(private val recipes: List<RecipeWithIngredientAndUnit>): Re
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
-        var ingredients = ""
-        for (ingredient in recipes[position].ingredients) {
-            ingredients += "${ingredient.ingredient} \n"
-        }
-        holder.nameTextView.text = recipes[position].toString()
-        //holder.descriptionTextView.text = recipes[position].recipe.nameEn
+        val recipe = recipes[position].recipe
+        holder.nameTextView.text = recipe.nameEn
+        holder.descriptionTextView.text = recipes[position].toString()
     }
 
     override fun getItemCount() = recipes.size
