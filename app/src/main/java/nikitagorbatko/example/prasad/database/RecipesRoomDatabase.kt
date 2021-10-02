@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.ImageView
 import androidx.room.*
 
-@Database(entities = [Recipe::class, Ingredient::class, Unit::class], version = 1, exportSchema = false)
+@Database(entities = [Recipe::class, Ingredient::class, Unit::class, Amount::class, IngredientWithAmount::class], version = 1, exportSchema = false)
 abstract class RecipeRoomDatabase : RoomDatabase() {
 
     abstract fun recipeDao(): RecipeDao

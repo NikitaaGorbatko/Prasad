@@ -6,15 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import nikitagorbatko.example.prasad.database.Ingredient
-import nikitagorbatko.example.prasad.database.IngredientAndUnit
-import nikitagorbatko.example.prasad.database.RecipeWithIngredientAndUnit
+import nikitagorbatko.example.prasad.database.Recipe
 
 class RecipeHolder(view: View): RecyclerView.ViewHolder(view) {
     val nameTextView = view.findViewById<TextView>(R.id.name_text_view)
     val descriptionTextView = view.findViewById<TextView>(R.id.ingredients_text_view)
 }
 
-class RecipesAdapter(private val recipes: List<RecipeWithIngredientAndUnit>): RecyclerView.Adapter<RecipeHolder>() {
+class RecipesAdapter(private val recipes: List<Recipe>): RecyclerView.Adapter<RecipeHolder>() {
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
@@ -24,8 +23,7 @@ class RecipesAdapter(private val recipes: List<RecipeWithIngredientAndUnit>): Re
     }
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
-        val recipe = recipes[position].recipe
-        holder.nameTextView.text = recipe.nameEn
+        holder.nameTextView.text = recipes[position].nameEn
         holder.descriptionTextView.text = recipes[position].toString()
     }
 

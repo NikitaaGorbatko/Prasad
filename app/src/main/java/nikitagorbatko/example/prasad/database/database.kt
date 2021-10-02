@@ -2,7 +2,6 @@ package nikitagorbatko.example.prasad.database
 
 import androidx.room.*
 
-
 @Entity(tableName = "recipe")
 data class Recipe(
     @PrimaryKey val recipeId: Int,
@@ -12,14 +11,11 @@ data class Recipe(
     val technologyEn: String
 )
 
-@Entity(foreignKeys = [ForeignKey(entity = Recipe::class, parentColumns = ["recipeId"], childColumns = ["recipeParentId"])])
+@Entity(tableName = "ingredient")
 data class Ingredient(
     @PrimaryKey val ingredientId: Int,
     val nameRu: String,
     val nameEn: String,
-    val descriptionRu: String,
-    val descriptionEn: String,
-    val recipeParentId: Int
 )
 
 @Entity(tableName = "unit")
@@ -27,7 +23,21 @@ data class Unit(
     @PrimaryKey val unitId: Int,
     val nameRu: String,
     val nameEn: String,
-    val amount: Int
+)
+
+@Entity(tableName = "amount")
+data class Amount(
+    @PrimaryKey val amountId: Int,
+    val amount: Int,
+    val unitId: Int
+)
+
+@Entity(tableName = "ingredient_with_amount")
+data class IngredientWithAmount(
+    @PrimaryKey @ColumnInfo(name = "ingredient_with_amount_id") val ingredientWithAmountId: Int,
+    val ingredientId: Int,
+    val amountId: Int,
+    val recipeId: Int
 )
 
 //@Entity(primaryKeys = ["ingredientId", "unitId"])
@@ -70,9 +80,8 @@ data class Unit(
 
 @Dao
 interface RecipeDao {
-//    @Transaction
-//    @Query("SELECT * FROM recipe")
-//    fun getRecipes(): List<RecipeWithIngredientAndUnit>
 
+    @Query("SELECT * FROM recipe")
+    fun getRecipes(): List<Recipe>
 
 }
