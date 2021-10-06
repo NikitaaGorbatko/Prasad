@@ -25,16 +25,16 @@ data class Unit(
     val nameEn: String,
 )
 
-@Entity(tableName = "amount")
+@Entity(tableName = "amount", foreignKeys = [ForeignKey(entity = Unit::class, parentColumns = ["unitId"], childColumns = ["unitId"])])
 data class Amount(
     @PrimaryKey val amountId: Int,
-    val amount: Int,
+    val value: Int,
     val unitId: Int
 )
 
-@Entity(tableName = "ingredient_with_amount")
+@Entity(tableName = "ingredient_with_amount", foreignKeys = [ForeignKey(entity = Amount::class, parentColumns = ["amountId"], childColumns = ["amountId"]), ForeignKey(entity = Ingredient::class, parentColumns = ["ingredientId"], childColumns = ["ingredientId"]), ForeignKey(entity = Recipe::class, parentColumns = ["recipeId"], childColumns = ["recipeId"])])
 data class IngredientWithAmount(
-    @PrimaryKey @ColumnInfo(name = "ingredient_with_amount_id") val ingredientWithAmountId: Int,
+    @PrimaryKey @ColumnInfo(name = "ingredient_with_amount") val ingredientWithAmountId: Int,
     val ingredientId: Int,
     val amountId: Int,
     val recipeId: Int
@@ -83,5 +83,8 @@ interface RecipeDao {
 
     @Query("SELECT * FROM recipe")
     fun getRecipes(): List<Recipe>
+
+    @Query("SELECT * FROM ingredient_with_amount WHERE recipeId = :recipeId")
+    fun getIngredients(recipeId: Int): List<IngredientWithAmount>
 
 }
